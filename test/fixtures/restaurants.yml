@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  eid: 1
+  min_scale: 1
+  max_scale: 1
+
+two:
+  eid: 1
+  min_scale: 1
+  max_scale: 1

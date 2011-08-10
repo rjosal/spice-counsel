@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Users: <%= controller.action_name %></title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/spice.css">
+  <%= javascript_include_tag :all %>
+  <%= stylesheet_link_tag 'scaffold' %>
+</head>
+<body>
+  <div id="header">
+    SPICE COUNSEL
+  </div>
+
+  <%= flash_helper %>
+  <p style="color: green"><%= notice %></p>
+
+  <%= yield %>
+
+  <script type="text/javascript" src="/javascripts/tabber-minimized.js"></script>
+  <link rel="stylesheet" href="/stylesheets/tabber.css" TYPE="text/css" MEDIA="screen">
+  <script type="text/javascript" defer="defer">
+    var tabberOptions = {
+    'manualStartup':true,
+    'onClick':function(args){
+    //$('flash') && $('flash').replace('');
+    var tabber = args.tabber; /* Tabber object */
+    var tabIndex = args.index;
+    }
+    };
+    tabberAutomatic(tabberOptions);
+  </script>
+</body>
+</html>

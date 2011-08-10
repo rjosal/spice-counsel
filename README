@@ -1,0 +1,6 @@
+requires some gems.  Put them in /site/spice-gems.
+
+set up your gem_path, gem_home, and path for these.
+
+gem install --no-ri --no-rdoc rails -v=2.3.12
+gem install --no-ri --no-rdoc json

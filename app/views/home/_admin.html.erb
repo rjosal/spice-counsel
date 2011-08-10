@@ -1,0 +1,9 @@
+<div id="container" class="tabbertab<%= ' tabbertabdefault' if params[:section] and params[:section] == 'admin'%>">
+  <h2>Admin</h2>
+  <div id="main">
+    <ul>
+      <li><%= link_to 'Manage Users', users_path %></li>
+      <li><%= link_to 'Manage Restaurants', restaurants_path %></li>
+    </ul>
+  </div>
+</div>

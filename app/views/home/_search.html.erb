@@ -1,0 +1,13 @@
+<div id="container" class="tabbertab<%= ' tabbertabdefault' if params[:section] and params[:section] == 'search'%>">
+  <h2>Search</h2>
+  <div id="main">
+    <% form_remote_tag(:url => {:controller => "home", :action => "search"}, :update => 'results') do %>
+      <%= label_tag(:query, "Query:") %>
+      <%= text_field_tag(:query) %>
+      <%= label_tag(:place, "Place:") %>
+      <%= text_field_tag(:place) %>
+      <%= submit_tag("Search") %>
+    <% end %>
+    <span id="results" class="results"></span>
+  </div>
+</div>

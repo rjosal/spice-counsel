@@ -1,0 +1,18 @@
+<p>
+  <b>Eid:</b>
+  <%=h @restaurant.eid %>
+</p>
+
+<p>
+  <b>Min scale:</b>
+  <%=h @restaurant.min_scale %>
+</p>
+
+<p>
+  <b>Max scale:</b>
+  <%=h @restaurant.max_scale %>
+</p>
+
+
+<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+<%= link_to 'Back', restaurants_path %>
