@@ -1,1 +1,28 @@
-<%= results.inspect %>
+<ul>
+<% results.each do |entity| %>
+  <li>
+    <%= entity.name %><br>
+    <%= entity.address %><br>
+    <%= entity.city %>, <%= entity.state %> <%= entity.zip %><br>
+    <%= entity.phone %>
+    <% if restaurant = Restaurant.find_by_eid(entity.id) %>
+      <br>Min Spicy: <%= restaurant.min_scale %> Max Spicy: <%= restaurant.max_scale %>
+      <br>
+      <div id="rating">
+      <% if rating = Rating.find_by_user_id_and_restaurant_id(@user.id, restaurant.id) %>
+        Your Rating = <%= rating.ok_value(true) %>
+      <% else %>
+        <% form_remote_for(Rating.new, :update => 'rating') do |f| %>
+          <%= f.hidden_field(:user_id, :value => @user.id) %>
+          <%= f.hidden_field(:restaurant_id, :value => restaurant.id) %>
+          <%= f.select(:ok_value, (restaurant.min_scale..restaurant.max_scale)) %>
+          <%= f.submit 'RATE!' %>
+        <% end %>
+      <% end %>
+      </div>
+    <% else %>
+      <br>CREATE SCALE!
+    <% end %>
+  </li>
+<% end %>
+</ul>

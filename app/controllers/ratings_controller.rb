@@ -44,9 +44,11 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       if @rating.save
+        format.js   { render :text => "Your Rating: #{@rating.ok_value(true)}" } #ajax
         format.html { redirect_to(@rating, :notice => 'Rating was successfully created.') }
         format.xml  { render :xml => @rating, :status => :created, :location => @rating }
       else
+        format.js   { render :text => "Error" } #ajax
         format.html { render :action => "new" }
         format.xml  { render :xml => @rating.errors, :status => :unprocessable_entity }
       end

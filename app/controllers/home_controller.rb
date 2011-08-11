@@ -12,6 +12,7 @@ class HomeController < ApplicationController
 
   def search
     Rails.logger.info 'SEARCHING'
+#TODO add a tag filter here no matter what so that only relevant spicy restaurants get shown
     res = SEARCH_CLIENT.search(params[:query], params[:place])
     render :partial => 'search_results', :locals => {:results => res}
   end
