@@ -1,4 +1,4 @@
-class RatingsController < ApplicationController
+class RatingsController < HomeController
   # GET /ratings
   # GET /ratings.xml
   def index
@@ -44,7 +44,7 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       if @rating.save
-        format.js   { render :text => "Your Rating: #{@rating.ok_value(true)}" } #ajax
+        format.js   { render :partial => 'restaurants/metadata', :locals => {:restaurant => @rating.restaurant} } #ajax
         format.html { redirect_to(@rating, :notice => 'Rating was successfully created.') }
         format.xml  { render :xml => @rating, :status => :created, :location => @rating }
       else
@@ -62,9 +62,11 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       if @rating.update_attributes(params[:rating])
+        format.js   { render :partial => 'restaurants/metadata', :locals => {:restaurant => @rating.restaurant} } #ajax
         format.html { redirect_to(@rating, :notice => 'Rating was successfully updated.') }
         format.xml  { head :ok }
       else
+        format.js   { render :text => "Error" } #ajax
         format.html { render :action => "edit" }
         format.xml  { render :xml => @rating.errors, :status => :unprocessable_entity }
       end

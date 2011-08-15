@@ -1,4 +1,4 @@
-class RestaurantsController < ApplicationController
+class RestaurantsController < HomeController
 
   layout 'spice'
 
@@ -47,9 +47,11 @@ class RestaurantsController < ApplicationController
 
     respond_to do |format|
       if @restaurant.save
+        format.js   { render :partial => 'metadata', :locals => {:restaurant => @restaurant} }
         format.html { redirect_to(@restaurant, :notice => 'Restaurant was successfully created.') }
         format.xml  { render :xml => @restaurant, :status => :created, :location => @restaurant }
       else
+        format.js   { render :text => 'Error' }
         format.html { render :action => "new" }
         format.xml  { render :xml => @restaurant.errors, :status => :unprocessable_entity }
       end

@@ -1,0 +1,14 @@
+<div id="container" class="tabbertab<%= ' tabbertabdefault' if params[:section] and params[:section] == 'top'%>">
+  <h2>What's Hot</h2>
+  <div id="main">
+    Restaurants with most ratings:
+    <% top_entities = Restaurant.top_by_ratings(3).map{|r| r.entity} %>
+    <%= render :partial => 'search_results', :locals => {:results => top_entities} %>
+    Users with most ratings:
+    <ul>
+      <% User.top_by_ratings(3).each do |u| %>
+        <li><%= "#{u.name} has #{u.ratings.count} ratings" -%></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

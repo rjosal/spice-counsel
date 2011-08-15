@@ -1,4 +1,5 @@
 require 'client/ls_search_client'
+require 'client/api_client'
 
 class HomeController < ApplicationController
   layout 'spice'
@@ -29,8 +30,7 @@ class HomeController < ApplicationController
       if !@user.nil?
         session[:user_id] = @user.id
         flash[:message] = "Successfully logged in as #{@user.name}"
-        @user.last_login = Time.now.utc
-        @user.save(false)
+        @user.update_attribute(:last_login, Time.now.utc)
         update_session_expiration
         redirect_back :controller => 'home'
       else

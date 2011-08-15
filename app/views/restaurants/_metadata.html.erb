@@ -1,0 +1,64 @@
+<% if @user %>
+      <div id="rating<%=restaurant.id%>" class="rating">
+      <% if rating = Rating.find_by_user_id_and_restaurant_id(@user.id, restaurant.id) %>
+        <div class="chili-holder-pref">
+          <div class="minrating"><%= restaurant.min_scale %></div>
+          <div class="maxrating"><%= restaurant.max_scale %></div>
+          <div class="clear"></div>
+          <div style="position:relative; left:<%=rating.ok_value.to_f*0.60 + 13%>%; top:-50px;">
+            <div class="rating-circle-pref"><%= rating.ok_value(true) %></div> 
+            <%= image_tag 'chili.png' %>
+          </div>
+          <div style="position:relative; top:-50px;">
+          <% form_remote_for(rating, :update => "rating#{restaurant.id}") do |f| %>
+            <table>
+            <tr><td>
+            <%= f.select(:ok_value, (restaurant.min_scale..restaurant.max_scale)) %>
+            </td>
+            <td>
+            <%= image_submit_tag 'spice_it.png' %>
+            </td></tr>
+            </table>
+          <% end %>
+          </div>
+        </div>
+      <% else %>
+        <div class="chili-holder-predict">
+          <% if @user.ratings.count >= 2 %>
+            <% prediction = restaurant.de_normalize_rating(APIClient.search(@user.id, restaurant.id)) %>
+          <% else %>
+            <% prediction = 'Undefined' %>
+          <% end %>
+            <div class="minrating"><%= restaurant.min_scale %></div>
+            <div class="maxrating"><%= restaurant.max_scale %></div>
+            <div class="clear"></div>
+            <% if prediction == 'Undefined' %>
+              <div style="position:relative; top:-50px"><span class="small">Insufficient information to predict.</span></div>
+              <% placed_chili = false %>
+            <% else %>
+              <div style="position:relative; left:<%=restaurant.normalize_rating(prediction).to_f*0.60 + 13%>%; top:-50px; text-align:left">
+                <div class="rating-circle-predict"><%= prediction %></div> 
+                <%= image_tag 'chili_gray.png' %>
+                <% placed_chili = true %>
+              </div>
+            <% end %>
+          <div style="position:relative; <%='top:-50px;' if placed_chili%>">
+          <% form_remote_for(Rating.new, :update => "rating#{restaurant.id}") do |f| %>
+            <table>
+            <%= f.hidden_field(:user_id, :value => @user.id) %>
+            <%= f.hidden_field(:restaurant_id, :value => restaurant.id) %>
+            <tr><td>
+            <%= f.select(:ok_value, (restaurant.min_scale..restaurant.max_scale)) %>
+            </td>
+            <td>
+            <%= image_submit_tag 'spice_it.png' %>
+            </td></tr>
+            </table>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
+      </div>
+<% else %>
+  <span class="small">Sign In for your predicted spice preference!</span>
+<% end %>

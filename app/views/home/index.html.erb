@@ -1,6 +1,20 @@
-<div class="tabber" id="main_tabber">
-  <%= render :partial => 'admin' %>
-  <%= render :partial => 'my_restaurants' %>
-  <%= render :partial => 'search' %>
+<div id="column1">
+  <%= image_tag 'logo_alternative.png' %>
+  <h3>Welcome <%= @user.name if @user %>!</h3>
+  <div id="howtocounsel">
+  <h4>How to Counsel</h4>
+  <ol>
+    <li>Set the Scale</li>
+    <li>Submit Spice Preferences</li>
+    <li>We Predict for You</li>
+  </ol>
+  </div>
 </div>
-
+<div id="column2">
+  <div class="tabber" id="main_tabber">
+    <%= render :partial => 'admin' if @user.role == 'admin' %>
+    <%= render :partial => 'search' %>
+    <%= render :partial => 'my_restaurants' %>
+    <%= render :partial => 'top' %>
+  </div>
+</div>

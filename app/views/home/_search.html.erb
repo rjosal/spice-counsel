@@ -1,13 +1,22 @@
 <div id="container" class="tabbertab<%= ' tabbertabdefault' if params[:section] and params[:section] == 'search'%>">
-  <h2>Search</h2>
+  <h2>Find the Spice!</h2>
   <div id="main">
+    <%= 'You need to rate at least 2 restaurants before we can give you predictions!' if @user.ratings.count < 2 -%>
     <% form_remote_tag(:url => {:controller => "home", :action => "search"}, :update => 'results') do %>
-      <%= label_tag(:query, "Query:") %>
-      <%= text_field_tag(:query) %>
-      <%= label_tag(:place, "Place:") %>
-      <%= text_field_tag(:place) %>
-      <%= submit_tag("Search") %>
+      <table>
+      <tr>
+      <td><%= label_tag(:query, "Business Name:") %></td>
+      <td><%= label_tag(:place, "Location:") %></td>
+      </tr>
+      <tr>
+      <td><%= text_field_tag(:query) %></td>
+      <td><%= text_field_tag(:place) %></td>
+      <td><%= image_submit_tag 'find_it.png' %></td>
+      </tr>
+      </table>
     <% end %>
-    <div id="results" class="results"></div>
+    <div id="results" class="results">
+      <div style="text-align:center"><%= image_tag 'begin_search.png' %></div>
+    </div>
   </div>
 </div>

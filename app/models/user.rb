@@ -2,6 +2,7 @@
 #$LastChangedBy: rjosal $
 
 class User < ActiveRecord::Base
+  has_many :ratings
 
   # validations
   validates_presence_of :name
@@ -14,6 +15,7 @@ class User < ActiveRecord::Base
   
   # method to set hashed password
   def password=(password)
+    return if password == '##hashed##'
     @password = password
     
     self.salt = User.random_string( 10 ) if self.salt.nil?
@@ -43,4 +45,12 @@ class User < ActiveRecord::Base
     nil
   end
 
+  def self.top_by_ratings(limit = 3)
+    conn = ActiveRecord::Base.connection
+    res = []
+    if conn
+      conn.select_values("select u.id from users u, ratings ra where u.id = ra.user_id group by u.id order by count(*) desc limit #{limit}").each { |id| res << User.find(id) }
+    end
+    res
+  end
 end

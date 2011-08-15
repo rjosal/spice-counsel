@@ -1,28 +1,31 @@
-<ul>
+<ul class="listings">
 <% results.each do |entity| %>
   <li>
-    <%= entity.name %><br>
-    <%= entity.address %><br>
-    <%= entity.city %>, <%= entity.state %> <%= entity.zip %><br>
-    <%= entity.phone %>
+    <div id="metadata<%=entity.id%>" class="metadata">
     <% if restaurant = Restaurant.find_by_eid(entity.id) %>
-      <br>Min Spicy: <%= restaurant.min_scale %> Max Spicy: <%= restaurant.max_scale %>
-      <br>
-      <div id="rating">
-      <% if rating = Rating.find_by_user_id_and_restaurant_id(@user.id, restaurant.id) %>
-        Your Rating = <%= rating.ok_value(true) %>
-      <% else %>
-        <% form_remote_for(Rating.new, :update => 'rating') do |f| %>
-          <%= f.hidden_field(:user_id, :value => @user.id) %>
-          <%= f.hidden_field(:restaurant_id, :value => restaurant.id) %>
-          <%= f.select(:ok_value, (restaurant.min_scale..restaurant.max_scale)) %>
-          <%= f.submit 'RATE!' %>
-        <% end %>
-      <% end %>
-      </div>
+      <%= render :partial => 'restaurants/metadata', :locals => {:restaurant => restaurant} %>
     <% else %>
-      <br>CREATE SCALE!
+      <div style="text-align:center"><span class="small">Do you know this restaurant's spiciness scale?</span></div>
+        <% form_remote_for(Restaurant.new, :update => "metadata#{entity.id}") do |f| %>
+          <table class="scaleit">
+          <%= f.hidden_field(:eid, :value => entity.id) %>
+          <tr><td>Min</td><td>Max</td></tr>
+          <tr>
+          <td><%= f.select(:min_scale, (0..100)) %></td>
+          <td><%= f.select(:max_scale, (0..100)) %></td>
+          </tr>
+          <tr><td colspan="2" style="text-align:center"><%= image_submit_tag 'scale_it.png' %></td></tr>
+          </table>
+        <% end %>
     <% end %>
+    </div>
+    <div class="bizdata">
+      <span class="bizname"><%= entity.name %></span><br>
+      <%= entity.address %><br>
+      <%= entity.city %>, <%= entity.state %> <%= entity.zip %><br>
+      <%= entity.phone %>
+    </div>
+    <div class="clear"></div>
   </li>
 <% end %>
 </ul>

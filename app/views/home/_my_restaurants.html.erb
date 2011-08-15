@@ -1,6 +1,7 @@
 <div id="container" class="tabbertab<%= ' tabbertabdefault' if params[:section] and params[:section] == 'my_restaurants'%>">
-  <h2>My Restaurants</h2>
+  <h2>Submitted</h2>
   <div id="main">
-    FOO
+    <% entities = @user.ratings.map{|r| r.restaurant.entity} %>
+    <%= render :partial => 'search_results', :locals => {:results => entities} %>
   </div>
 </div>

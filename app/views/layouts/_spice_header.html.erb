@@ -1,0 +1,7 @@
+  <div id="header">
+    <div id="signout">
+      <%= link_to 'Sign Out', '/home/logout' if @user && @user.id %>
+    </div>
+  </div>
+
+  <%# flash_helper %>

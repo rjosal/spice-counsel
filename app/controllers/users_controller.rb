@@ -47,7 +47,10 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
+        session[:user_id] = @user.id
+        @user.update_attribute(:last_login, Time.now.utc)
+        session[:expiration] = 3.hours.from_now
+        format.html { redirect_to('/', :notice => 'Sign Up Successful!') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }

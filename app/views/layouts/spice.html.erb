@@ -5,24 +5,18 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Users: <%= controller.action_name %></title>
+  <link rel="stylesheet" href="/stylesheets/tabber.css" TYPE="text/css" MEDIA="screen">
   <link rel="stylesheet" type="text/css" href="/stylesheets/spice.css">
   <%= javascript_include_tag :all %>
   <%= stylesheet_link_tag 'scaffold' %>
 </head>
 <body>
-  <div id="header">
-    SPICE COUNSEL
-  </div>
-
-  <%= flash_helper %>
-  <p style="color: green"><%= notice %></p>
-
+  <%= render :partial => 'layouts/spice_header' %>
   <%= yield %>
-
-  <%= link_to 'Logout', '/home/logout' %>
   
+  <div id="footer"></div>
+
   <script type="text/javascript" src="/javascripts/tabber-minimized.js"></script>
-  <link rel="stylesheet" href="/stylesheets/tabber.css" TYPE="text/css" MEDIA="screen">
   <script type="text/javascript" defer="defer">
     var tabberOptions = {
     'manualStartup':true,

@@ -1,27 +1,43 @@
-<h1>Login</h1>
+<div id="column1">
+  <%= image_tag 'logo_alternative.png' %>
+  <% if @user %>
+    <h3>Welcome <%= @user.name %>!</h3>
+  <% else %>
+    <h3>&nbsp;</h3>
+  <% end %>
+  <div id="howtocounsel">
+    <% form_for :user, @user, :url => { :action => "login" } do |f| %>
+    <table>
+      <tr>
+        <td valign=top>Email:</td>
+        <td valign=top>
+          <%= f.text_field "email", "size" => 15 %>
+        </td>
+      </tr>
+      <tr>
+        <td valign=top>Password:</td>
+        <td valign=top>
+          <%= f.password_field "password", "size" => 15 %>
+        </td>
+      </tr>
+      <tr>
+        <td valign=top colspan=2 align=right>
+          <%= image_submit_tag 'sign_in.png' %>
+        </td>
+      </tr>
+    </table>
+    
+    <% end %>
 
-	<% form_for :user, @user, :url => { :action => "login" } do |f| %>
-	<table>
-		<tr>
-			<td valign=top>Email:</td>
-			<td valign=top>
-				<%= f.text_field "email", "size" => 20 %>
-			</td>
-		</tr>
-		<tr>
-			<td valign=top>Password:</td>
-			<td valign=top>
-				<%= f.password_field "password", "size" => 20 %>
-			</td>
-		</tr>
-		<tr>
-			<td valign=top colspan=2 align=right>
-				<input type="submit" value="Login" />
-			</td>
-		</tr>
-	</table>
-	
-	<% end %>
-
-<br>
-<%= link_to 'Sign Up!', '/users/new' %> 
+    <br>
+  </div>
+  <div id="signup">
+    Not a Member?<br>
+    <%= link_to(image_tag('sign_up.png'), '/users/new') %> 
+  </div>
+</div>
+<div id="column2">
+  <div class="tabber" id="main_tabber">
+    <%= render :partial => 'top' %>
+  </div>
+</div>

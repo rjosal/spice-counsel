@@ -1,6 +1,167 @@
 #header {
-  font-family:monospace;
-  letter-spacing:3px;
+  text-align:right;
+}
+#header a {
+  color:green;
+  background:none;
+  text-decoration: none;
+  font-weight:bold;
+}
+#header a:hover {
+  text-decoration: underline;
+}
+
+html {
+  background:#ffe0e0;
+}
+
+body {
+  margin:0 auto 0 auto;
+  padding:15px;
+  width:800px;
+}
+
+#flash_notice {
+  color: green;
+}
+
+#column1 {
+  float:left;
+  width:29%;
+}
+
+#column2 {
+  float:right;
+  width:70%;
+}
+
+#main_tabber {
+  background:#fff;
+}
+
+
+#footer, .clear {
+  clear:both;
+}
+
+ul.listings {
+  padding:0;
+  list-style-type: none;
+}
+
+ul.listings li {
+  padding:2px;
+  border-top: 1px dashed #ce0026;
+}
+
+ul.tabbernav li a {
+  background:#eee;
+}
+ul.tabbernav li a:link {
+  color:#333;
+}
+ul.tabbernav li.tabberactive a:link {
+  color:#ce0026;
+}
+ul.tabbernav li a:hover {
+  background:#eaa;
+}
+
+.bizdata {
+  width:61%;
+  float:right;
+}
+
+.metadata {
+  width: 38%;
+  float: left;
+}
+.rating {
+  width: 142px;
+  margin: 0 auto 0 auto;
+}
+
+span.bizname {
+  font-weight:bold;
+  font-size:1.1em;
+}
+
+span.small {
+  font-size:0.8em;
+  line-height:0.9em;
+}
+
+table.scaleit {
+  margin:0 auto 0 auto;
+}
+
+div#howtocounsel {
+  background:#eee;
+  padding:4px;
+}
+
+h4 {
+  margin-top:0px;
+}
+
+div.chili-holder-pref, div.chili-holder-predict {
+  position:relative;
+  width:142px;
+  height:74px;
+  padding-top:51px;
+}
+
+div.chili-holder-pref {
+  background: url('/images/bg_preferred.png') no-repeat center;
+}
+
+div.chili-holder-predict {
+  background: url('/images/bg_predicted.png') no-repeat center;
   text-align:center;
-  font-size:3em;
+}
+
+div.rating-circle-pref, div.rating-circle-predict {
+  width:20px;
+  height:20px;
+  padding:0;
+  margin:0;
+  text-align:center;
+  color: #fff;
+  font-weight:bold;
+}
+div.rating-circle-pref {
+  background: url('/images/circle.png') no-repeat center;
+}
+div.rating-circle-predict {
+  background: url('/images/circle_gray.png') no-repeat center;
+}
+div.minrating, div.maxrating {
+  color: #555;
+  font-weight:bold;
+}
+div.minrating {
+  float:left;
+}
+div.maxrating {
+  float:right;
+}
+
+#signup {
+  text-align:right;
+  padding:13px;
+  font-weight:bold;
+  line-height:1.9em;
+}
+#signup a {
+  color:#444;
+  background:none;
+}
+a img {
+  text-decoration: none;
+  border: 0 none;
+  background:none;
+}
+
+#flash {
+  padding:3px;
 }
